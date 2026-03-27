@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Run Simulation</title>
+<style>
+    body {
+        margin: 0;
+        background: #0a0a0a;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 600px;
+    }
+
+    .text {
+        font-size: 22px;
+        opacity: 0;
+        transition: opacity 1s ease;
+    }
+
+    .visible {
+        opacity: 1;
+    }
+
+    .final {
+        font-size: 28px;
+        margin-top: 20px;
+        color: #ff4fd8;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div id="step1" class="text">Inicializando sistema...</div>
+    <div id="step2" class="text">Analizando variables...</div>
+    <div id="step3" class="text">Resultado encontrado...</div>
+    <div id="final" class="text final">¿Quieres ser mi novia?</div>
+</div>
+
+<script>
+    const steps = ["step1", "step2", "step3", "final"];
+    
+    steps.forEach((id, index) => {
+        setTimeout(() => {
+            document.getElementById(id).classList.add("visible");
+        }, index * 1500);
+    });
+</script>
+
+</body>
+</html>
