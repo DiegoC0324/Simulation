@@ -2,69 +2,121 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Simulation</title>
+<title>AI Simulation</title>
 
 <style>
-    body {
-        margin: 0;
-        background: radial-gradient(circle at center, #0a0a0a, #000);
-        color: #fff;
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        text-align: center;
-    }
+body {
+    margin: 0;
+    background: radial-gradient(circle at center, #050505, #000);
+    color: #00d4ff;
+    font-family: "Courier New", monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
 
-    .container {
-        max-width: 600px;
-    }
+.container {
+    max-width: 700px;
+}
 
-    .text {
-        font-size: 22px;
-        opacity: 0;
-        transition: opacity 1s ease;
-    }
+.text {
+    font-size: 20px;
+    opacity: 0;
+    margin: 10px 0;
+    transition: opacity 1s ease;
+}
 
-    .visible {
-        opacity: 1;
-    }
+.visible {
+    opacity: 1;
+}
 
-    .highlight {
-        color: #00d4ff;
-    }
+.highlight {
+    color: #ff4fd8;
+}
 
-    .final {
-        font-size: 30px;
-        margin-top: 20px;
-        color: #ff4fd8;
-        font-weight: bold;
-    }
+.final {
+    font-size: 32px;
+    margin-top: 30px;
+    color: #ff4fd8;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Cursor tipo terminal */
+.cursor::after {
+    content: "|";
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}
 </style>
 
 </head>
 <body>
 
-<div class="container">
-    <div id="step1" class="text">Inicializando sistema...</div>
-    <div id="step2" class="text">Analizando variables: <span class="highlight">Ale Alvarado</span>...</div>
-    <div id="step3" class="text">Procesando datos emocionales...</div>
-    <div id="step4" class="text">Analizando compatibilidad...</div>
-    <div id="step5" class="text">Compatibilidad detectada: <span class="highlight">99.8%</span></div>
-    <div id="step6" class="text">Resultado óptimo encontrado...</div>
-    <div id="step7" class="text">Inicializando propuesta...</div>
-    <div id="final" class="text final">Ale, ¿quieres ser mi novia?</div>
-</div>
+<div class="container" id="container"></div>
 
 <script>
-    const steps = ["step1", "step2", "step3", "step4", "step5", "step6", "step7", "final"];
-    
-    steps.forEach((id, index) => {
-        setTimeout(() => {
-            document.getElementById(id).classList.add("visible");
-        }, index * 1400);
+
+const steps = [
+"Inicializando sistema...",
+"Cargando módulos emocionales...",
+"Sincronizando datos...",
+"Analizando variables: Ale Alvarado...",
+"Escaneando interacciones...",
+"Procesando patrones de comportamiento...",
+"Calculando compatibilidad...",
+"Compatibilidad detectada: 99.8%",
+"Validando resultado...",
+"Ejecutando simulación final...",
+"Detectando resultado óptimo...",
+"Iniciando protocolo especial..."
+];
+
+const finalMessage = "Ale, ¿quieres ser mi novia?";
+
+const container = document.getElementById("container");
+
+function typeText(text, delay) {
+    return new Promise(resolve => {
+        const div = document.createElement("div");
+        div.classList.add("text", "cursor");
+        container.appendChild(div);
+
+        let i = 0;
+
+        const interval = setInterval(() => {
+            div.textContent = text.substring(0, i);
+            i++;
+
+            if (i > text.length) {
+                clearInterval(interval);
+                div.classList.remove("cursor");
+                resolve();
+            }
+        }, delay);
     });
+}
+
+async function runSimulation() {
+    for (let step of steps) {
+        await typeText(step, 40); // velocidad typing
+        await new Promise(r => setTimeout(r, 900)); // pausa entre pasos
+    }
+
+    const final = document.createElement("div");
+    final.classList.add("final");
+    final.innerHTML = `<span class="highlight">${finalMessage}</span>`;
+    container.appendChild(final);
+}
+
+runSimulation();
+
 </script>
 
 </body>
