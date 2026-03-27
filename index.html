@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Simulation</title>
 
 <style>
@@ -19,6 +20,7 @@ body {
 }
 
 .container {
+    width: 92%;
     max-width: 700px;
     padding: 20px;
     position: relative;
@@ -43,10 +45,11 @@ body {
 }
 
 .text {
-    font-size: 20px;
-    margin: 8px 0;
+    font-size: clamp(16px, 4.5vw, 22px);
+    margin: 10px 0;
     opacity: 0;
     transition: opacity 0.6s ease;
+    line-height: 1.4;
 }
 
 .visible { opacity: 1; }
@@ -54,7 +57,7 @@ body {
 .highlight { color: #ff4fd8; }
 
 .final {
-    font-size: 34px;
+    font-size: clamp(22px, 6vw, 34px);
     margin-top: 30px;
     color: #ff4fd8;
     font-weight: bold;
@@ -66,6 +69,7 @@ body {
     to { text-shadow: 0 0 30px #ff4fd8; }
 }
 
+/* Cursor */
 .cursor::after {
     content: "|";
     animation: blink 1s infinite;
@@ -77,8 +81,8 @@ body {
 /* Botones */
 button {
     margin: 12px;
-    padding: 12px 22px;
-    font-size: 16px;
+    padding: 14px 24px;
+    font-size: clamp(14px, 4vw, 16px);
     cursor: pointer;
 }
 
@@ -215,7 +219,7 @@ async function start(){
     output.appendChild(yesBtn);
     output.appendChild(noBtn);
 
-    // RESPUESTAS
+    // RESPUESTA SÍ
     yesBtn.onclick = () => {
         vibrate([300,100,300]);
         beep(1200,0.3);
@@ -226,6 +230,7 @@ async function start(){
         output.appendChild(msg);
     };
 
+    // RESPUESTA NO (suave)
     noBtn.onclick = async () => {
         vibrate(100);
         noBtn.remove();
